@@ -1,0 +1,4 @@
+# Ignore the files/directories below:
+
+./eeg
+./data_preprocessed_python
