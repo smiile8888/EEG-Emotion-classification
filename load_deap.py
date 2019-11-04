@@ -4,6 +4,8 @@ from multiprocessing import Pool
 import sys
 import numpy as np
 
+DATASET_PATH = "/dataset/DEAP/data_preprocessed_python"
+
 chan = ['Fp1','AF3','F3','F7','FC5','FC1','C3','T7','CP5','CP1','P3','P7','PO3','O1','Oz','Pz','Fp2','AF4','Fz','F4','F8','FC6','FC2','Cz','C4','T8','CP6','CP2','P4','P8','PO4','O2']
 nLabel, nTrial, nUser, nChannel, nTime = 4, 40, 32, 32, 8064
 print("Program started \n")
@@ -16,7 +18,7 @@ for i in range(nUser):  # 4, 40, 32, 32, 8064
 		name = '%0*d' % (2, i+1)
 	else:
 		name = i+1
-	fname = "/data_preprocessed_python/data_preprocessed_python/s" + str(name) + ".dat"
+	fname = DATASET_PATH + str(name) + ".dat"
 	x = pickle.load(open(fname, 'rb'))
 	print(fname)
 	for tr in range(nTrial):
