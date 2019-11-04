@@ -21,7 +21,7 @@ for i in range(nUser):  # 4, 40, 32, 32, 8064
 	else:
 		name = i+1
 	fname = DATASET_PATH + "s" + str(name) + ".dat"
-	x = pickle.load(open(fname, 'rb'))
+	x = pickle.load(open(fname, 'rb'), encoding='bytes')
 	print(fname)
 	for tr in range(nTrial):
 		fout_data = open("features_raw.csv",'w')
