@@ -18,7 +18,7 @@ for i in range(nUser):  # 4, 40, 32, 32, 8064
 		name = '%0*d' % (2, i+1)
 	else:
 		name = i+1
-	fname = DATASET_PATH + str(name) + ".dat"
+	fname = DATASET_PATH + "s" + str(name) + ".dat"
 	x = pickle.load(open(fname, 'rb'))
 	print(fname)
 	for tr in range(nTrial):
