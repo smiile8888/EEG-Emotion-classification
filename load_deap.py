@@ -6,7 +6,8 @@ import numpy as np
 
 # Path on Google Drive
 # This would be run on Google Colab
-DATASET_PATH = "../dataset/DEAP/data_preprocessed_python/"
+# DATASET_PATH = "../dataset/DEAP/data_preprocessed_python/"
+DATASET_PATH = "data_preprocessed_python/"
 
 chan = ['Fp1','AF3','F3','F7','FC5','FC1','C3','T7','CP5','CP1','P3','P7','PO3','O1','Oz','Pz','Fp2','AF4','Fz','F4','F8','FC6','FC2','Cz','C4','T8','CP6','CP2','P4','P8','PO4','O2']
 nLabel, nTrial, nUser, nChannel, nTime = 4, 40, 32, 32, 8064
@@ -21,10 +22,11 @@ for i in range(nUser):  # 4, 40, 32, 32, 8064
 	else:
 		name = i+1
 	fname = DATASET_PATH + "s" + str(name) + ".dat"
-	x = pickle.load(open(fname, 'rb'), encoding='bytes')
+	# This is the most painful part for Python3, this is the right way to encode the data
+	x = pickle.load(open(fname, 'rb'), encoding="iso-8859-1")
 	print(fname)
 	for tr in range(nTrial):
-		fout_data = open("features_raw.csv",'w')
+		fout_data = open("features_raw.csv", 'w')
 		for ch in chan:
 			fout_data.write(ch+",")
 		fout_data.write("\n")
@@ -33,7 +35,7 @@ for i in range(nUser):  # 4, 40, 32, 32, 8064
 				if ch < 32:
 					if ch == 31:
 						fout_data.write(str(x['data'][tr][ch][dat]))
-					else:					
+					else:
 						fout_data.write(str(x['data'][tr][ch][dat])+",")
 			fout_data.write("\n")
 		fout_labels0.write(str(x['labels'][tr][0]) + "\n")
