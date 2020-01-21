@@ -1,49 +1,51 @@
-# EEG-Emotion-classification
+# Emotion Classification using DEAP Dataset
 
-# PROBLEM S TATEMENT
-It is difficult to look at the EEG signal and identify the state of Human mind. In this assign-
-ment, the SVM classifier is trained with Deap dataset to predict the state of mind. the state of
-mind is predicted in terms of valence, arousal. which can further be used to predict the state
-of mind in terms of expression.
-# PROCEDURE TO SOLVE THE ABOVE PROBLEM
-In this assignment, the preprocessed data is used for training the classifier.
-Steps involve in training the dataset:-
-1. Extracting the dataset
-2. Finding the features
-3. Reducing the dimension
-4. traning the vector
-5. checking the classifier efficiency
-## EXTRACTING THE DATASET
-The DEAP dataset consists of two parts:
-1. The ratings from an online self-assessment where 120 one-minute extracts of music
-videos were each rated by 14-16 volunteers based on arousal, valence and dominance.
-2. The participant ratings, physiological recordings and face video of an experiment where
-32 volunteers watched a subset of 40 of the above music videos. EEG and physiological
-signals were recorded and each participant also rated the videos as above.
-In this assignment, labels are extracted into separate file and data of each channel is extracted
-into separate file. data from each channel is stored in row wise versus time in column for each
-trail,per person
-## FINDING THE FEATURES
-In this assignment, Wavelet transform is used to decompose the each channel data into the
-five feature i.e
-• Delta (< 4 Hz)
-• Theta (4-7 Hz)
-• Alpha (8-15 Hz)
-• Beta (16-31 Hz)
-• Gamma (> 32 Hz)
-In this assignment, obtained the 7 decomposed values but we negalted the frequency whose
-range is in 0-0.5 Hz so that the artifcats are removed. The frequency whose range is near 50
-Hz are removed to reduce the effect of power line on signals. finally, EEG band are obtained
-for each channel.
-## REDUCING THE DIMENSION
-The dimension can be reduced using one of the below mention method:-
-1. Standard Deviation
-2. Mean
-3. Variance
-4. Median
-But in this assignment Standard Deviation is used because it describe the devaition of each
-EEG Band power density properly given by the equation below.
-## TRANING THE VECTOR
-In this assignment, the classifier used is Support vector machine (SVM). we can also use other
-classifier or neural network to predict the values but the training efficiency is found to be
-nearly 98 percentage with SVM.
+It is difficult to classify human emotions based on the electroencephalogram (EEG). 
+In this project, the Support Vector Machine (SVM) is used to classify emotions trained on the DEAP dataset to 
+predict emotions based on arousal-valence dimension.
+The DEAP dataset is a multimodal dataset for the analysis of human affective states [\[1\]](#references). 
+The electroencephalogram (EEG) and peripheral physiological signals of 32 participants were 
+recorded as each watched 40 one-minute-long excerpts of music videos. 
+Each participant was asked for doing self-assessment to rate each video in terms of 
+the levels of arousal, valence, like/dislike, dominance and familiarity. 
+For 22 of the 32 participants, frontal face video was also recorded [\[1\]](#references). 
+
+## Methodology
+### 1. Data Preprocessing
+The data of each participant has 32 EEG channels with four labels (valence, arousal, dominance, liking) (see details on 
+[DEAP Dataset](https://www.eecs.qmul.ac.uk/mmv/datasets/deap/)). These values is decomposed to five features by using 
+Wavelet Transform [\[2\]]()
+These five features are based on the frequency of the signals: 
+1) Delta (< 4 Hz)
+2) Theta (4-7 Hz)
+3) Alpha (8-15 Hz)
+4) Beta (16-31 Hz)
+5) Gamma (> 32 Hz)
+
+Two ranges of frequencies are removed (0-0.5 Hz to avoid the artifacts, and near 50 Hz to reduce the effect of power line on signals).
+
+### 2. Modeling
+The traditional SVM with default parameters as a classifier is used to be a model. However, other classifiers, 
+such as neural networks and deep learning models should be applied in comparison in future work.
+
+## Dependencies
+To install dependencies of this project:
+
+```python setup.py```
+
+## Running Program
+To start the program:
+1. Download [DEAP Dataset](https://www.eecs.qmul.ac.uk/mmv/datasets/deap/) (you need to sign disclosure). We will use `data_preprocessed_python`, make sure you download the right one.
+2. Put the entire folder in the same working directory
+3. Make sure you edit the path, `DATASET_PATH` variable in `load_deap.py` regarding the path of data
+4. Run `load_deap.py` to get the data ready for training
+5. Run `svm_clas.py` to train the model
+
+## References
+1. Koelstra, S., Muhl, C., Soleymani, M., Lee, J.S., Yazdani, A., Ebrahimi, T., Pun, T., Nijholt, A. and Patras, I., 2011. 
+Deap: A database for emotion analysis; using physiological signals. _IEEE transactions on affective computing_, 3(1), pp.18-31.
+
+#
+**Disclaimer:** This project originally published by [Raghav714](https://github.com/Raghav714/EEG-Emotion-classification). 
+I modified the code to be compatible with **Python3**, updated the libraries, and refactored the code and document accordingly. 
+This project is just-for-fun.
